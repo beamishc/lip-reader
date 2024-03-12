@@ -11,7 +11,7 @@ RESIZE = (70,30)
 DATFILE =  "shape_predictor_68_face_landmarks.dat"
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor('/Users/cbeams/code/projects-1561/lip-reader/lip_detect/shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('lip_detect/shape_predictor_68_face_landmarks.dat')
 
 def lip_detect(frame):
     ic('RUNNING')

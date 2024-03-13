@@ -43,7 +43,7 @@ if video_file is not None:
     st.write('---- all frames captured ----')
 
     # AWAITING CORRECT API LINK
-    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict", json=json.dumps(frames))
+    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/", json=json.dumps(frames))
 
     st.write('---- post request sent ----')
 

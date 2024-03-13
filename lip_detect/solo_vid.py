@@ -3,7 +3,9 @@ import dlib
 import cv2
 from lip_detect.cleaning import *
 from icecream import ic
-from PIL import Image as im
+# from PIL import Image as im
+
+ic.disable()
 
 LIP_MARGIN = 0.4                # Marginal rate for lip-only image.
 RESIZE = (70,30)

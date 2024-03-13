@@ -51,16 +51,16 @@ if video_file is not None:
     gif_list = frames[:75]  # Example list of 10 random frames
     # Save the frames as a GIF
     imageio.mimsave('name.gif', gif_list, duration=0.1)
+    st.image('animation.gif', width=400)
+    # file_ = open("name.gif", "rb")
+    # contents = file_.read()
+    # data_url = base64.b64encode(contents).decode("utf-8")
+    # file_.close()
 
-    file_ = open("name.gif", "rb")
-    contents = file_.read()
-    data_url = base64.b64encode(contents).decode("utf-8")
-    file_.close()
-
-    st.markdown(
-        f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',
-        unsafe_allow_html=True,
-)
+#     st.markdown(
+#         f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',
+#         unsafe_allow_html=True,
+# )
 
     st.write('---- posting request ----')
 

@@ -63,10 +63,11 @@ if video_file is not None:
     animated_gif = BytesIO()
     gif_list[0].save(animated_gif, format = 'GIF', save_all = True, loop = 0, append_images = gif_list[1:])
 
-    file_ = open(animated_gif, "rb")
-    contents = file_.read()
-    data_url = base64.b64encode(contents).decode("utf-8")
-    file_.close()
+    animated_gif.seek(0)
+    file = im.open(animated_gif)
+    # contents = file_.read()
+    data_url = base64.b64encode(file).decode("utf-8")
+    # file_.close()
 
     st.markdown(
         f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',

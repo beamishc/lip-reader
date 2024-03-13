@@ -5,8 +5,9 @@ import json
 import numpy as np
 from PIL import Image as im
 from lip_detect.solo_vid import lip_detect
-import imageio
+# import imageio
 import base64
+from io import BytesIO
 
 video_file = st.file_uploader("Upload a video file", type=["mp4", "mov"])
 
@@ -27,6 +28,7 @@ if video_file is not None:
     st.write('---- video capturing ----')
 
     frames = []
+    lips_lst = []
     # while vidcap.isOpened():
     while success:
     # while i <= 10:
@@ -34,6 +36,7 @@ if video_file is not None:
         if frame is not None:
             img = im.fromarray(frame).convert('L')
             lips = lip_detect(np.array(img))
+            lips_lst.append(lips)
             frames.append(lips.tolist())
             i += 1
             if i % 10 == 0:
@@ -48,19 +51,27 @@ if video_file is not None:
 
     st.write('---- creating lip gif ----')
 
-    gif_list = frames[:75]  # Example list of 10 random frames
+    # gif_list = frames[:75]  # Example list of 10 random frames
     # Save the frames as a GIF
-    imageio.mimsave('name.gif', gif_list, duration=0.1)
-    st.image('animation.gif', width=400)
-    # file_ = open("name.gif", "rb")
-    # contents = file_.read()
-    # data_url = base64.b64encode(contents).decode("utf-8")
-    # file_.close()
+    # imageio.mimsave('name.gif', gif_list, duration=0.1)
 
-#     st.markdown(
-#         f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',
-#         unsafe_allow_html=True,
-# )
+    gif_list = []
+    for frame in lips_lst[:75]:
+        img = im.fromarray(frame)
+        gif_list.append(img)
+
+    animated_gif = BytesIO()
+    gif_list[0].save(animated_gif, format = 'GIF', save_all = True, loop = 0, append_images = gif_list[1:])
+
+    file_ = open(animated_gif, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    st.markdown(
+        f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',
+        unsafe_allow_html=True,
+)
 
     st.write('---- posting request ----')
 
@@ -77,9 +88,6 @@ if video_file is not None:
 
     st.write(first_frame.shape)
     st.image(first_frame)
-
-
-
 
     # # Save uploaded file to temporary location
     # temp_dir = tempfile.TemporaryDirectory()

@@ -67,7 +67,7 @@ if video_file is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(animated_gif.read())
 
-    file_ = open(tfile.name, "rb")
+    file_ = open(tfile, "rb")
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()

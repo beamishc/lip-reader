@@ -52,24 +52,24 @@ def lip_detect(frame):
     return cropped
 
 
-vid = cv2.VideoCapture("/Users/cbeams/code/projects-1561/lip-reader/test.mp4")
+# vid = cv2.VideoCapture("/Users/cbeams/code/projects-1561/lip-reader/test.mp4")
 
-success, frame = vid.read()
-img = im.fromarray(frame).convert('L')  # Convert image into grayscale
-f_g = np.array(img)
-ic(f_g.shape)
+# success, frame = vid.read()
+# img = im.fromarray(frame).convert('L')  # Convert image into grayscale
+# f_g = np.array(img)
+# ic(f_g.shape)
 # gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)   # Convert image into grayscale
 
-vid.release()
-print(lip_detect(f_g))
+# vid.release()
+# print(lip_detect(f_g))
 
 #testing
-if __name__ == "main":
-    vid = cv2.VideoCapture("/Users/cbeams/code/projects-1561/lip-reader/test.mp4")
+# if __name__ == "main":
+#     vid = cv2.VideoCapture("/Users/cbeams/code/projects-1561/lip-reader/test.mp4")
 
-    success, frame = vid.read()
-    img = im.fromarray(frame).convert('L')  # Convert image into grayscale
-    f_g = np.array(img, dtype='f')
-    ic(f_g.shape)
-    vid.release()
-    print(lip_detect(np.array(img)))
+#     success, frame = vid.read()
+#     img = im.fromarray(frame).convert('L')  # Convert image into grayscale
+#     f_g = np.array(img, dtype='f')
+#     ic(f_g.shape)
+#     vid.release()
+#     print(lip_detect(np.array(img)))

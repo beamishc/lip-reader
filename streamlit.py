@@ -31,8 +31,8 @@ if video_file is not None:
     frames = []
     lips_lst = []
     # while vidcap.isOpened():
-    while success:
-    # while i <= 10:
+    # while success:
+    while i <= 10:
         success, frame = vidcap.read()
         if frame is not None:
             img = im.fromarray(frame).convert('L')
@@ -65,12 +65,12 @@ if video_file is not None:
     gif_list[0].save(animated_gif, format = 'GIF', save_all = True, loop = 0, append_images = gif_list[1:])
 
     tfile = tempfile.NamedTemporaryFile(delete=False)
-    tfile.write(animated_gif)
+    tfile.write(animated_gif.read())
 
-    file_ = open(tfile.name, "rb")
-    contents = file_.read()
+    # file_ = open(tfile.name, "rb")
+    contents = tfile.read()
     data_url = base64.b64encode(contents).decode("utf-8")
-    file_.close()
+    tfile.close()
 
     st.markdown(
         f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',

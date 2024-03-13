@@ -30,4 +30,11 @@ async def numpy_test(test: Request):
     print('oh my god we did it?!')
     first_frame = np.array(np.array(json.loads(data))[0])
     print(first_frame.shape)
+
+    frames = np.array(json.loads(data))
+
+    all_frames = np.array([np.array(frame)for frame in frames])
+
+    np.savez('test_data.npz', all_frames)
+
     return {"message": "Received data for prediction", "data": json.dumps(first_frame.tolist())}

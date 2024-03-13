@@ -65,9 +65,9 @@ if video_file is not None:
     gif_list[0].save(animated_gif, format = 'GIF', save_all = True, loop = 0, append_images = gif_list[1:])
 
     tfile = tempfile.NamedTemporaryFile(delete=False)
-    tfile.write(animated_gif.read())
+    tfile.write(animated_gif)
 
-    file_ = open(tfile, "rb")
+    file_ = open(tfile.name, "rb")
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()

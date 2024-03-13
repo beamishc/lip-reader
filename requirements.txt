@@ -3,4 +3,4 @@ opencv-python
 numpy
 matplotlib
 imageio
-dlib
+dlib-bin

@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image as im
 from lip_detect.solo_vid import lip_detect
 # import imageio
+import tempfile
 import base64
 from io import BytesIO
 
@@ -63,16 +64,17 @@ if video_file is not None:
     animated_gif = BytesIO()
     gif_list[0].save(animated_gif, format = 'GIF', save_all = True, loop = 0, append_images = gif_list[1:])
 
-    animated_gif.seek(0)
-    file = im.open(animated_gif)
-    # contents = file_.read()
-    data_url = base64.b64encode(file).decode("utf-8")
-    # file_.close()
+    tfile = tempfile.NamedTemporaryFile(delete=False)
+    tfile.write(animated_gif.read())
+
+    file_ = open(tfile.name, "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
 
     st.markdown(
         f'<img src="data:image/gif;base64,{data_url}" alt="lips gif">',
-        unsafe_allow_html=True,
-)
+        unsafe_allow_html=True,)
 
     st.write('---- posting request ----')
 

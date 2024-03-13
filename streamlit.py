@@ -17,9 +17,6 @@ if video_file is not None:
         f.write(video_file.read()) # save video to disk
 
     st.write('---- saved to disk ----')
-    container = st.empty()
-    clock = f"{0:02d}:{0:02d}"
-    st.write('---- clock starts ----')
 
     vidcap = cv2.VideoCapture(vid)
     success = True
@@ -28,11 +25,7 @@ if video_file is not None:
     st.write('---- video capturing ----')
 
     frames = []
-    while vidcap.isOpened():
-        for secs in range(0, 1000, 1):
-            mm, ss = secs // 60, secs % 60
-            container.metric("Time Lapsed", f"{mm:02d}:{ss:02d}")
-
+    # while vidcap.isOpened():
     while success:
     # while i <= 10:
         success, frame = vidcap.read()
@@ -42,9 +35,6 @@ if video_file is not None:
             frames.append(lips.tolist())
             i += 1
             st.write(f'---- frame {i} complete ----')
-
-    st.write('---- clock ends ----')
-    container.metric("Time Lapsed", clock)
 
     st.image(lips)
 

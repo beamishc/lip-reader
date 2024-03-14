@@ -40,12 +40,14 @@ if video_file is not None:
                         frames = []
                     else:
                         st.write(response)
-                st.write(f'---- frame {i} complete ----')
+                st.write(f'---- frame {i} complete {response} ----')
     response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
-    if response.ok:
-        frames = []
-    else:
-        st.write(response)
+    # if response.ok:
+    #     frames = []
+    # else:
+    #     st.write(response)
+    st.write(response)
+
     st.image(lips)
 
     vidcap.release()
@@ -60,3 +62,6 @@ if video_file is not None:
     st.write(response)
     st.write(type(response.json()))
     st.write(response.json())
+
+    if response.ok:
+        st.balloons()

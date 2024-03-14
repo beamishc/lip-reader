@@ -65,7 +65,7 @@ with tab_ourmodel:
     if video_file is not None:
         # requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/clear/")
         filename = video_file.name
-# Display video if a file is selected
+
         col_in, col_out = st.columns([2,1])
         with col_in:
             st.video(video_file)
@@ -101,8 +101,10 @@ with tab_ourmodel:
                 st.write('Our model is processing your video...')
                 st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
 
-            st.write("Here you will see one frame of the lips we detected on that video!")
+            st.write("Here's one example of the lips we detected!")
             st.image(lips,  use_column_width=True)
+            st.write("This is ultimately what our model is using to create it's predictions")
+
 
     if final_request:
         st.write('''### <span style="text-align: center;"> And here's our model's prediction! </div>''',  unsafe_allow_html=True)

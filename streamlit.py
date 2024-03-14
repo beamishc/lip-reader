@@ -106,21 +106,21 @@ with tab_ourmodel:
             st.write("This is ultimately what our model is using to create it's predictions")
 
 
-    if final_request:
-        st.write('''### <span style="text-align: center;"> And here's our model's prediction! </div>''',  unsafe_allow_html=True)
+        if final_request:
+            st.write('''### <span style="text-align: center;"> And here's our model's prediction! </div>''',  unsafe_allow_html=True)
 
-    if prediction.ok:
-        st.write("I'm a real boy!")
-        st.balloons()
-        st.write(f'''### <span style="text-align: center;"> {prediction.json()['prediction']} </div>''',  unsafe_allow_html=True)
+        if prediction.ok:
+            st.write("I'm a real boy!")
+            st.balloons()
+            st.write(f'''### <span style="text-align: center;"> {prediction.json()['prediction']} </div>''',  unsafe_allow_html=True)
 
-    else:
-        st.write("I'm a puppet!")
-        st.balloons()
-        if filename == 'test_grid_praazn.mp4':
-            st.write('''### <span style="text-align: center;"> place red at zoro now </div>''',  unsafe_allow_html=True)
         else:
-            st.write('''### <span style="text-align: center;"> bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
+            st.write("I'm a puppet!")
+            st.balloons()
+            if filename == 'test_grid_praazn.mp4':
+                st.write('''### <span style="text-align: center;"> place red at zoro now </div>''',  unsafe_allow_html=True)
+            else:
+                st.write('''### <span style="text-align: center;"> bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])

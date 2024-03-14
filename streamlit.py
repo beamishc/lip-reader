@@ -106,7 +106,7 @@ with tab_ourmodel:
             st.image(lips,  use_column_width=True)
             st.write("This is ultimately what our model is using to create it's predictions")
 
-        col_l, col_r = st.columns([3,6])
+        col_l, col_r = st.columns([4,5])
         with col_l:
             if final_request:
                 st.write('''# <span style="text-align: center;"> Our prediction: </div>''',  unsafe_allow_html=True)

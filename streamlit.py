@@ -65,6 +65,8 @@ with tab_ourmodel:
     if video_file is not None:
         all_clear = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/clear/")
         filename = video_file.name
+        with st.spinner('Our model is processing your video...'):
+            st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
 
         col_in, col_out = st.columns([2,1])
         with col_in:
@@ -95,11 +97,9 @@ with tab_ourmodel:
 
             prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
             final_request = True
+        st.success()
 
         with col_out:
-            st.write('Our model is processing your video...')
-            st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
-
             st.write("Here's one example of lips we detected!")
             st.image(lips,  use_column_width=True)
             st.write("This is ultimately what our model is using to create it's predictions")

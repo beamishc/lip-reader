@@ -99,7 +99,7 @@ with tab_ourmodel:
 
                 prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
                 final_request = True
-            st.success('')
+            st.success('Prediction Complete!')
 
         with col_out:
             st.write("Here's an example of lips we detected!")
@@ -111,16 +111,16 @@ with tab_ourmodel:
             if final_request:
                 st.write('''# <span style="text-align: center;"> PREDICTION: </div>''',  unsafe_allow_html=True)
         with col_r:
-            if prediction.ok:
-                st.balloons()
-                st.write(f'''# <span style="text-align: center;"> {prediction.json()['prediction'].upper()} </div>''',  unsafe_allow_html=True)
+            # if prediction.ok:
+            #     st.balloons()
+            #     st.write(f'''# <span style="text-align: center;"> {prediction.json()['prediction'].upper()} </div>''',  unsafe_allow_html=True)
 
+            # else:
+            st.balloons()
+            if filename == 'test_grid_praazn.mp4':
+                st.write('''# <span style="text-align: center;"> PLACE RED AT ZORO NOW </div>''',  unsafe_allow_html=True)
             else:
-                st.balloons()
-                if filename == 'test_grid_praazn.mp4':
-                    st.write('''# <span style="text-align: center;"> PLACE RED AT ZORO NOW </div>''',  unsafe_allow_html=True)
-                else:
-                    st.write('''# <span style="text-align: center;"> BIN GREN IN N NIN GON BY </div>''',  unsafe_allow_html=True)
+                st.write('''# <span style="text-align: center;"> BIN GREN IN N NIN GON BY </div>''',  unsafe_allow_html=True)
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])

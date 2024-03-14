@@ -99,9 +99,8 @@ with tab_ourmodel:
             if not final_request:
                 st.image('https://tinyurl.com/lip-waiting',  use_column_width=True)
 
-            if lips:
-                st.write("Here's the latest frame of the lips we detected on that video!")
-                st.image(lips,  use_column_width=True)
+            st.write("Here you will see one frame of the lips we detected on that video!")
+            st.image(lips,  use_column_width=True)
 
             if final_request:
                 st.write("And here's our amazing prediction!")

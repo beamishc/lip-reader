@@ -26,31 +26,29 @@ if video_file is not None:
 
     frames = []
     while success:
-        while vidcap.isOpened():
+        # while vidcap.isOpened():
     # while i <= 10:
-            success, frame = vidcap.read()
-            if frame is not None:
-                img = im.fromarray(frame).convert('L')
-                lips = lip_detect(np.array(img))
-                frames.append(lips.tolist())
-                i += 1
-                if i % 10 == 0:
-                    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
-                    if response.ok:
-                        frames = []
-                    else:
-                        st.write(response)
-                    st.write(f'---- frame {i} complete {str(response)} ----')
+        success, frame = vidcap.read()
+        if frame is not None:
+            img = im.fromarray(frame).convert('L')
+            lips = lip_detect(np.array(img))
+            frames.append(lips.tolist())
+            i += 1
+            if i % 10 == 0:
+                response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                if response.ok:
+                    frames = []
+                else:
+                    st.write(response)
+                st.write(f'---- frame {i} complete {str(response)} ----')
+
+    vidcap.release()
+
     response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
-    # if response.ok:
-    #     frames = []
-    # else:
-    #     st.write(response)
+
     st.write(response)
 
     st.image(lips)
-
-    vidcap.release()
 
     st.write('---- all frames captured ----')
 

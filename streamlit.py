@@ -106,11 +106,11 @@ with tab_ourmodel:
             st.image(lips,  use_column_width=True)
             st.write("This is ultimately what our model is using to create it's predictions")
 
-        col_l, col_m, col_r = st.columns([1,6,1])
-        with col_m:
+        col_l, col_r = st.columns([3,6])
+        with col_l:
             if final_request:
-                st.write('''# <span style="text-align: center;"> And here's our model's prediction: </div>''',  unsafe_allow_html=True)
-
+                st.write('''# <span style="text-align: center;"> Our prediction: </div>''',  unsafe_allow_html=True)
+        with col_r:
             if prediction.ok:
                 st.balloons()
                 st.write(f'''# <span style="text-align: center;"> {prediction.json()['prediction'].upper()} </div>''',  unsafe_allow_html=True)

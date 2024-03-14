@@ -54,4 +54,4 @@ if video_file is not None:
         st.write(prediction.json())
     else:
         st.balloons()
-        st.write('I AM A CORRECT RESPONSE PLACEHOLDER')
+        st.write('bin gren in n nin gon by')

@@ -26,8 +26,8 @@ if video_file is not None:
 
     frames = []
     # while vidcap.isOpened():
-    while success:
-    # while i <= 10:
+    # while success:
+    while i <= 10:
         success, frame = vidcap.read()
         if frame is not None:
             img = im.fromarray(frame).convert('L')

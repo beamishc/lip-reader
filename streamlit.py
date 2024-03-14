@@ -61,11 +61,11 @@ with tab_ourmodel:
 
     video_file = st.file_uploader("", type=["mp4", "mov"])
     final_request = None
-    filename = video_file.name
-    st.write(filename)
 
 # Display video if a file is selected
     if video_file is not None:
+        filename = video_file.name
+        st.write(filename)
         st.video(video_file)
         # if video_file is not None and final_request is None:
         #     pass

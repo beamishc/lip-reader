@@ -63,7 +63,7 @@ with tab_ourmodel:
     final_request = False
 
     if video_file is not None:
-        # requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/clear/")
+        all_clear = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/clear/")
         filename = video_file.name
 
         col_in, col_out = st.columns([2,1])

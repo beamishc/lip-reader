@@ -97,11 +97,11 @@ with tab_ourmodel:
             final_request = True
 
         with col_out:
-            while not final_request:
+            while vidcap.isOpened():
                 st.write('Our model is processing your video...')
                 st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
 
-            st.write("Here's one example of the lips we detected!")
+            st.write("Here's one example of lips we detected!")
             st.image(lips,  use_column_width=True)
             st.write("This is ultimately what our model is using to create it's predictions")
 

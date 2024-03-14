@@ -5,3 +5,4 @@ matplotlib
 dlib-bin
 icecream
 imageio
+hydralit_components

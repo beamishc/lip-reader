@@ -4,6 +4,7 @@ import requests
 import json
 import numpy as np
 from PIL import Image as im
+import hydralit_components as hc
 from lip_detect.solo_vid import lip_detect
 
 ##########################################
@@ -71,32 +72,34 @@ with tab_ourmodel:
         col_in, col_out = st.columns([2,1])
         with col_in:
             st.video(video_file)
-            vid = video_file.name
-            with open(vid, mode='wb') as f:
-                f.write(video_file.read()) # save video to disk
+            with hc.HyLoader('Our model is processing your video',hc.Loaders.pulse_bars,):
+                vid = video_file.name
+                with open(vid, mode='wb') as f:
+                    f.write(video_file.read()) # save video to disk
 
-            vidcap = cv2.VideoCapture(vid)
-            success = True
-            i = 0
+                vidcap = cv2.VideoCapture(vid)
+                success = True
+                i = 0
 
-            frames = []
-            while success:
-                success, frame = vidcap.read()
-                if frame is not None:
-                    lips = lip_detect(np.array(im.fromarray(frame).convert('L')))
-                    frames.append(lips.tolist())
-                    i += 1
-                    if i % 10 == 0:
-                        response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
-                        if response.ok:
-                                frames = []
+                frames = []
+                while success:
+                    success, frame = vidcap.read()
+                    if frame is not None:
+                        lips = lip_detect(np.array(im.fromarray(frame).convert('L')))
+                        frames.append(lips.tolist())
+                        i += 1
+                        if i % 10 == 0:
+                            response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                            if response.ok:
+                                    frames = []
 
-            vidcap.release()
+                vidcap.release()
 
-            response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
 
-            prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
-            final_request = True
+                prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
+                final_request = True
+            st.success('Prediction complete!')
 
         with col_out:
             st.write("Here's one example of lips we detected!")

@@ -11,9 +11,11 @@ import base64
 ##########################################
 ##  Title, Tabs, and Sidebar            ##
 ##########################################
+
+img_path = "https://raw.githubusercontent.com/beamishc/lip-reader/master/"
 col1, col2 = st.columns([3,8])
 with col1:
-    st.image("https://raw.githubusercontent.com/beamishc/lip_reader/master/logo.png", use_column_width = True)
+    st.image(img_path + "logo.png", use_column_width = True)
 
 with col2:
     st.title("LIP TRANSLATE")
@@ -37,7 +39,7 @@ Welcome to Lip Translate, where cutting-edge data science meets the art of commu
     This model harnesses the power of deep learning algorithms to decode spoken language from visual cues, paving the way for more inclusive and accessible communication technologies.
     </div>''', unsafe_allow_html=True)
     ""
-    st.image('https://raw.githubusercontent.com/beamishc/lip_reader/master/200w.gif',  use_column_width=True)
+    st.image(img_path + '200w.gif',  use_column_width=True)
 
     st.markdown(" #### Analysing data from real world")
     st.markdown('''<div style="text-align: justify;">
@@ -121,24 +123,24 @@ with tab_ourmodel:
 
         else:
             st.balloons()
-            st.write('bin gren in n nin gon by')
+            st.write('place red at zoro now')
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])
     with column1:
         ""
-        st.image("https://raw.githubusercontent.com/beamishc/lip_reader/master/lips_ecem.png", use_column_width = True)
+        st.image(img_path + "lips_ecem.png", use_column_width = True)
         ""
         ""
-        st.image("https://raw.githubusercontent.com/beamishc/lip_reader/master/lips_alessia.png", use_column_width = True)
-        ""
-        ""
-        ""
-        st.image("https://raw.githubusercontent.com/beamishc/lip_reader/master/lips_mathilda.png", use_column_width = True)
+        st.image(img_path + "lips_alessia.png", use_column_width = True)
         ""
         ""
         ""
-        st.image("https://raw.githubusercontent.com/beamishc/lip_reader/master/lips_girish.png", use_column_width = True)
+        st.image(img_path + "lips_mathilda.png", use_column_width = True)
+        ""
+        ""
+        ""
+        st.image(img_path + "lips_girish.png", use_column_width = True)
         ""
         ""
         ""

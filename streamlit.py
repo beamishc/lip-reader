@@ -31,8 +31,8 @@ if video_file is not None:
             i += 1
             if i % 10 == 0:
                 response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                st.write(response.json())
                 if response.ok:
-                    st.write(response.json())
                     frames = []
                 else:
                     st.write(response)

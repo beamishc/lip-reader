@@ -30,7 +30,7 @@ if video_file is not None:
             frames.append(lips.tolist())
             i += 1
             if i % 10 == 0:
-                response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", params = {'idx': str(i)}, json=json.dumps(frames))
+                response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
                 st.write(response.json())
                 if response.ok:
                     frames = []
@@ -40,7 +40,7 @@ if video_file is not None:
 
     vidcap.release()
 
-    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/",params = {'idx': str(i)}, json=json.dumps(frames))
+    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
 
     st.write(response)
 

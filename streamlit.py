@@ -25,17 +25,27 @@ if video_file is not None:
     st.write('---- video capturing ----')
 
     frames = []
-    # while vidcap.isOpened():
-    # while success:
-    while i <= 10:
-        success, frame = vidcap.read()
-        if frame is not None:
-            img = im.fromarray(frame).convert('L')
-            lips = lip_detect(np.array(img))
-            frames.append(lips.tolist())
-            i += 1
-            st.write(f'---- frame {i} complete ----')
-
+    while success:
+        while vidcap.isOpened():
+    # while i <= 10:
+            success, frame = vidcap.read()
+            if frame is not None:
+                img = im.fromarray(frame).convert('L')
+                lips = lip_detect(np.array(img))
+                frames.append(lips.tolist())
+                i += 1
+                if i % 10 == 0:
+                    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                    if response.ok:
+                        frames = []
+                    else:
+                        st.write(response)
+                st.write(f'---- frame {i} complete ----')
+    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+    if response.ok:
+        frames = []
+    else:
+        st.write(response)
     st.image(lips)
 
     vidcap.release()
@@ -43,17 +53,10 @@ if video_file is not None:
     st.write('---- all frames captured ----')
 
     # AWAITING CORRECT API LINK
-    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/", json=json.dumps(frames))
+    response = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
 
     st.write('---- post request sent ----')
 
     st.write(response)
     st.write(type(response.json()))
     st.write(response.json())
-
-    result = response.json()['data']
-
-    first_frame = np.array(json.loads(result))
-
-    st.write(first_frame.shape)
-    st.image(first_frame)

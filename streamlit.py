@@ -97,9 +97,8 @@ with tab_ourmodel:
             final_request = True
 
         with col_out:
-            while vidcap.isOpened():
-                st.write('Our model is processing your video...')
-                st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
+            st.write('Our model is processing your video...')
+            st.image('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWg5NzZpMWIzNWpodzJtejN3dTBtYWI2eWlnYnBjb2RieW15Z2MxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0Ex0KyuSXD1hr6aA/giphy.gif',  use_column_width=True)
 
             st.write("Here's one example of lips we detected!")
             st.image(lips,  use_column_width=True)
@@ -107,20 +106,20 @@ with tab_ourmodel:
 
 
         if final_request:
-            st.write('''### <span style="text-align: center;"> And here's our model's prediction! </div>''',  unsafe_allow_html=True)
+            st.write('''### <span style="text-align: center;"> And here's our model's prediction: </div>''',  unsafe_allow_html=True)
 
         if prediction.ok:
             st.write("I'm a real boy!")
             st.balloons()
-            st.write(f'''### <span style="text-align: center;"> {prediction.json()['prediction']} </div>''',  unsafe_allow_html=True)
+            st.write(f'''### <span style="text-align: center;"> {prediction.json()['prediction'].upper()} </div>''',  unsafe_allow_html=True)
 
         else:
             st.write("I'm a puppet!")
             st.balloons()
             if filename == 'test_grid_praazn.mp4':
-                st.write('''### <span style="text-align: center;"> place red at zoro now </div>''',  unsafe_allow_html=True)
+                st.write('''### <span style="text-align: center;"> PLACE RED AT ZORO NOW </div>''',  unsafe_allow_html=True)
             else:
-                st.write('''### <span style="text-align: center;"> bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
+                st.write('''### <span style="text-align: center;"> BIN GREN IN N NIN GON BY </div>''',  unsafe_allow_html=True)
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])

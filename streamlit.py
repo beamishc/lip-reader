@@ -37,7 +37,7 @@ Welcome to Lip Translate, where cutting-edge data science meets the art of commu
     This model harnesses the power of deep learning algorithms to decode spoken language from visual cues, paving the way for more inclusive and accessible communication technologies.
     </div>''', unsafe_allow_html=True)
     ""
-    st.image('200w.gif',  use_column_width=True)
+    st.image('https://raw.githubusercontent.com/beamishc/lip_reader/master/200w.gif',  use_column_width=True)
 
     st.markdown(" #### Analysing data from real world")
     st.markdown('''<div style="text-align: justify;">

@@ -99,17 +99,17 @@ with tab_ourmodel:
 
                 prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
                 final_request = True
-            st.success('Prediction complete!')
+            st.success('')
 
         with col_out:
             st.write("Here's an example of lips we detected!")
             st.image(lips,  use_column_width=True)
-            st.write("This is ultimately what our model is using to create it's predictions")
+            st.write("This is ultimately what our model is uses for predictions")
 
         col_l, col_r = st.columns([4,5])
         with col_l:
             if final_request:
-                st.write('''# <span style="text-align: center;"> Our prediction: </div>''',  unsafe_allow_html=True)
+                st.write('''# <span style="text-align: center;"> PREDICTION: </div>''',  unsafe_allow_html=True)
         with col_r:
             if prediction.ok:
                 st.balloons()

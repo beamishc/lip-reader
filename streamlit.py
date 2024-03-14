@@ -58,7 +58,7 @@ with tab_ourmodel:
 
     st.markdown('''## <span style="color:black">How It Works</span>
             ''', unsafe_allow_html=True)
-    "Below, we're sending a video into the model to get back a lip reading prediction... Let's see how well it does :)"
+    "Upload a video to run it through our model!"
 
     video_file = st.file_uploader("", type=["mp4", "mov"])
     final_request = False
@@ -72,7 +72,7 @@ with tab_ourmodel:
         col_in, col_out = st.columns([2,1])
         with col_in:
             st.video(video_file)
-            with hc.HyLoader('Our model is processing your video',hc.Loaders.pulse_bars,):
+            with hc.HyLoader('',hc.Loaders.pulse_bars,):
                 vid = video_file.name
                 with open(vid, mode='wb') as f:
                     f.write(video_file.read()) # save video to disk
@@ -102,7 +102,7 @@ with tab_ourmodel:
             st.success('Prediction complete!')
 
         with col_out:
-            st.write("Here's one example of lips we detected!")
+            st.write("Here's an example of lips we detected!")
             st.image(lips,  use_column_width=True)
             st.write("This is ultimately what our model is using to create it's predictions")
 

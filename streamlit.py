@@ -5,8 +5,6 @@ import json
 import numpy as np
 from PIL import Image as im
 from lip_detect.solo_vid import lip_detect
-import imageio
-import base64
 
 ##########################################
 ##  Title, Tabs, and Sidebar            ##
@@ -63,6 +61,8 @@ with tab_ourmodel:
 
     video_file = st.file_uploader("", type=["mp4", "mov"])
     final_request = None
+    filename = video_file.name
+    st.write(filename)
 
 # Display video if a file is selected
     if video_file is not None:
@@ -123,13 +123,16 @@ with tab_ourmodel:
 
         else:
             st.balloons()
-            st.write('place red at zoro now')
+            if filename == 'test_grid_praazn.mp4':
+                st.write('''<span style="text-align: center;"> PREDICTION: place red at zoro now </div>''',  unsafe_allow_html=True)
+            else:
+                st.write('''<span style="text-align: center;"> PREDICTION: bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])
     with column1:
         ""
-        st.image(img_path + "lips_ecem.png", use_column_width = True)
+        st.image(img_path + "lips_girish.png", use_column_width = True)
         ""
         ""
         st.image(img_path + "lips_alessia.png", use_column_width = True)
@@ -140,7 +143,7 @@ with tab_aboutus:
         ""
         ""
         ""
-        st.image(img_path + "lips_girish.png", use_column_width = True)
+        st.image(img_path + "lips_ecem.png", use_column_width = True)
         ""
         ""
         ""

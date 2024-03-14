@@ -4,3 +4,4 @@ numpy
 matplotlib
 dlib-bin
 icecream
+imageio

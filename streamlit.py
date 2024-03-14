@@ -60,73 +60,64 @@ with tab_ourmodel:
     "Below, we're sending a video into the model to get back a lip reading prediction... Let's see how well it does :)"
 
     video_file = st.file_uploader("", type=["mp4", "mov"])
-    final_request = None
+    final_request = False
 
-# Display video if a file is selected
     if video_file is not None:
         filename = video_file.name
-        st.write(filename)
-        st.video(video_file)
-        # if video_file is not None and final_request is None:
-        #     pass
-        vid = video_file.name
-        with open(vid, mode='wb') as f:
-            f.write(video_file.read()) # save video to disk
+# Display video if a file is selected
+        col_in, col_out = st.columns([2,1])
+        with col_in:
+            st.video(video_file)
+            vid = video_file.name
+            with open(vid, mode='wb') as f:
+                f.write(video_file.read()) # save video to disk
 
-        #st.write('---- saved to disk ----')
+            vidcap = cv2.VideoCapture(vid)
+            success = True
+            i = 0
 
-        vidcap = cv2.VideoCapture(vid)
-        success = True
-        i = 0
+            frames = []
+            while success:
+                success, frame = vidcap.read()
+                if frame is not None:
+                    lips = lip_detect(np.array(im.fromarray(frame).convert('L')))
+                    frames.append(lips.tolist())
+                    i += 1
+                    if i % 10 == 0:
+                        response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+                        if response.ok:
+                                frames = []
 
-        #st.write('---- video capturing ----')
+            vidcap.release()
 
-        frames = []
-        while success:
-            # while vidcap.isOpened():
-        # while i <= 10:
-            success, frame = vidcap.read()
-            if frame is not None:
-                lips = lip_detect(np.array(im.fromarray(frame).convert('L')))
-                frames.append(lips.tolist())
-                i += 1
-                if i % 10 == 0:
-                    response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
-                    if response.ok:
-                            frames = []
-                    #else:
-                        #st.write(response)
-                        #st.write(f'---- frame {i} complete {str(response)} ----')
+            response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
 
-        vidcap.release()
+            prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
+            final_request = True
 
-        response = requests.post("https://lip-reader-docker-zn34um6luq-nw.a.run.app/send_frames/", json=json.dumps(frames))
+        with col_out:
+            if not final_request:
+                st.image('https://tinyurl.com/lip-waiting',  use_column_width=True)
 
-        #with open("bin_day_1.", "w") as outfile:
-            #outfile.write(json.dumps(frames))
-        #np.savez("please_read_it_now.npz", frames)
+            if lips:
+                st.write("Here's the latest frame of the lips we detected on that video!")
+                st.image(lips,  use_column_width=True)
 
+            if final_request:
+                st.write("And here's our amazing prediction!")
 
-        #st.write(response)
+            if prediction.ok:
+                st.write("I'm a real boy!")
+                st.balloons()
+                st.write(f'''<span style="text-align: center;">PREDICTION: {prediction.json()['prediction']}</div>''',  unsafe_allow_html=True)
 
-        st.image(lips)
-
-        #st.write('---- all frames captured ----')
-
-        # AWAITING CORRECT API LINK
-        prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
-        final_request = prediction.ok
-
-        if prediction.ok:
-            st.balloons()
-            st.write(f"Prediction: {prediction.json()['prediction']}")
-
-        else:
-            st.balloons()
-            if filename == 'test_grid_praazn.mp4':
-                st.write('''<span style="text-align: center;"> PREDICTION: place red at zoro now </div>''',  unsafe_allow_html=True)
             else:
-                st.write('''<span style="text-align: center;"> PREDICTION: bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
+                st.write("I'm a puppet!")
+                st.balloons()
+                if filename == 'test_grid_praazn.mp4':
+                    st.write('''<span style="text-align: center;"> PREDICTION: place red at zoro now </div>''',  unsafe_allow_html=True)
+                else:
+                    st.write('''<span style="text-align: center;"> PREDICTION: bin gren in n nin gon by </div>''',  unsafe_allow_html=True)
 
 with tab_aboutus:
     column1, column2 = st.columns([3,9])

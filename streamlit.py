@@ -47,9 +47,11 @@ if video_file is not None:
     st.image(lips)
 
     # AWAITING CORRECT API LINK
-    response = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
+    prediction = requests.get("https://lip-reader-docker-zn34um6luq-nw.a.run.app/predict/")
 
-    st.write(response.json())
-
-    if response.ok:
+    if prediction.ok:
         st.balloons()
+        st.write(prediction.json())
+    else:
+        st.balloons()
+        st.write('I AM A CORRECT RESPONSE PLACEHOLDER')
